@@ -26,6 +26,10 @@ const AppHeader = () => {
     setModal(true);
   };
 
+  const onClose = () => {
+    setDrawer(false);
+  };
+
   useEffect(() => {
     const keypress = (event) => {
       if (event.key === '/') {
@@ -63,8 +67,8 @@ const AppHeader = () => {
         <CoinInfoModal coin={coin} />
       </Modal>
 
-      <Drawer title="Add Asset" onClose={() => setDrawer(false)} open={drawer}>
-        <AddAssetForm />
+      <Drawer title="Add Asset" onClose={() => setDrawer(false)} open={drawer} destroyOnClose>
+        <AddAssetForm onClose={onClose} />
       </Drawer>
     </Layout.Header>
   );
