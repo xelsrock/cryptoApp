@@ -8,10 +8,16 @@ export const fakeFetchCrypto = () => {
   });
 };
 
+// export const fetchAssets = () => {
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve(cryptoAssets);
+//     }, 100);
+//   });
+// };
+
 export const fetchAssets = () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(cryptoAssets);
-    }, 100);
-  });
+  const assets = JSON.parse(localStorage.getItem('assets'));
+
+  return assets;
 };

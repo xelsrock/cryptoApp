@@ -11,7 +11,10 @@ const cryptoContext = createContext({
 export const CryptoContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [crypto, setCrypto] = useState([]);
-  const [assets, setAssets] = useState([]);
+  const [assets, setAssets] = useState(JSON.parse(localStorage.getItem('assets')) || []);
+  console.log(assets);
+
+  localStorage.setItem('assets', JSON.stringify(assets));
 
   const mapAssets = (assets, result) => {
     return assets.map((asset) => {
@@ -33,11 +36,13 @@ export const CryptoContextProvider = ({ children }) => {
       setLoading(true);
 
       const { result } = await fakeFetchCrypto();
-      const dataAssets = await fetchAssets();
+
+      if (assets.length) {
+        const dataAssets = await fetchAssets();
+        setAssets(mapAssets(dataAssets, result));
+      }
 
       setCrypto(result);
-
-      setAssets(mapAssets(dataAssets, result));
 
       setLoading(false);
     };
