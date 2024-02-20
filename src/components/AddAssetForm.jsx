@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import dayjs from 'dayjs';
+
 import { useCrypto } from '../context';
 import { Divider, Select, Space, Form, Button, InputNumber, DatePicker, Result } from 'antd';
 import CoinInfo from './CoinInfo';
@@ -96,6 +98,7 @@ const AddAssetForm = ({ onClose }) => {
       }}
       initialValues={{
         price: +coin.price.toFixed(2),
+        date: dayjs(),
       }}
       onFinish={onFinish}
       validatemessage={validateMessage}>
@@ -123,8 +126,8 @@ const AddAssetForm = ({ onClose }) => {
         <InputNumber onChange={handleCoinPrice} style={{ width: '100%' }} />
       </Form.Item>
 
-      <Form.Item label="Date & Time" name="date">
-        <DatePicker showTime />
+      <Form.Item label="Date" name="date">
+        <DatePicker />
       </Form.Item>
 
       <Form.Item label="Total" name="total">
@@ -133,7 +136,7 @@ const AddAssetForm = ({ onClose }) => {
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Add Asset
+          Add Coin
         </Button>
       </Form.Item>
     </Form>

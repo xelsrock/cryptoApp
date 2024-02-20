@@ -12,7 +12,6 @@ export const CryptoContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [crypto, setCrypto] = useState([]);
   const [assets, setAssets] = useState(JSON.parse(localStorage.getItem('assets')) || []);
-  console.log(assets);
 
   localStorage.setItem('assets', JSON.stringify(assets));
 
@@ -54,8 +53,12 @@ export const CryptoContextProvider = ({ children }) => {
     setAssets((prev) => mapAssets([...prev, newAsset], crypto));
   };
 
+  const removeAsset = (coin) => {
+    setAssets((prev) => prev.filter((p) => p.id !== coin.id));
+  };
+
   return (
-    <cryptoContext.Provider value={{ loading, crypto, assets, addAsset }}>
+    <cryptoContext.Provider value={{ loading, crypto, assets, addAsset, removeAsset }}>
       {children}
     </cryptoContext.Provider>
   );

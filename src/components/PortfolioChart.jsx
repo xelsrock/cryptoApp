@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PortfolioChart = () => {
   const { assets } = useCrypto();
-  
+
   const data = {
     labels: assets.map((asset) => asset.name),
     datasets: [
@@ -28,8 +28,18 @@ const PortfolioChart = () => {
     ],
   };
 
+  if (!assets.length) {
+    return;
+  }
+
   return (
-    <div style={{ display: 'flex', marginBottom: '1rem', justifyContent: 'center', height: 400 }}>
+    <div
+      style={{
+        display: 'flex',
+        marginBottom: '1rem',
+        justifyContent: 'center',
+        height: 400,
+      }}>
       <Pie data={data} />
     </div>
   );

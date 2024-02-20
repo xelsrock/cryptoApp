@@ -32,7 +32,7 @@ const AppHeader = () => {
 
   useEffect(() => {
     const keypress = (event) => {
-      if (event.key === '/') {
+      if (event.code === 'Slash') {
         setSelect((prev) => !prev);
       }
     };
@@ -50,7 +50,7 @@ const AppHeader = () => {
         open={select}
         onSelect={handleSelect}
         onClick={() => setSelect((prev) => !prev)}
-        value="press / to open"
+        value="Crypto Info ( press / )"
         options={crypto.map((coin) => ({ value: coin.id, label: coin.name, icon: coin.icon }))}
         optionRender={(option) => (
           <Space>
@@ -60,14 +60,14 @@ const AppHeader = () => {
         )}
       />
       <Button type="primary" onClick={() => setDrawer(true)}>
-        Add Asset
+        Add Coin
       </Button>
 
       <Modal open={modal} onOk={() => setModal(false)} onCancel={() => setModal(false)}>
         <CoinInfoModal coin={coin} />
       </Modal>
 
-      <Drawer title="Add Asset" onClose={() => setDrawer(false)} open={drawer} destroyOnClose>
+      <Drawer title="Add Coin" onClose={() => setDrawer(false)} open={drawer} destroyOnClose>
         <AddAssetForm onClose={onClose} />
       </Drawer>
     </Layout.Header>
